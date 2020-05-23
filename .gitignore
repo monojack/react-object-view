@@ -118,5 +118,5 @@ esm
 cjs
 
 # gh-pages
-/index.html
-/public
+# /index.html
+# /public
