@@ -1,0 +1,18 @@
+.view {
+  box-shadow: 0 -10px 40px transparentize($color: #222222, $amount: 0.9);
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+  overflow: hidden;
+  padding: 16px;
+  display: flex;
+  flex-flow: column;
+
+  .header {
+    flex: none;
+  }
+
+  .main {
+    padding: 16px;
+    overflow-y: auto;
+  }
+}

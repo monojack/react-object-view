@@ -1,0 +1,24 @@
+{
+  "presets": [
+    [
+      "@babel/preset-env",
+      {
+        "loose": true
+      }
+    ]
+  ],
+  "plugins": [["@babel/plugin-transform-react-jsx"]],
+  "env": {
+    "esm": {
+      "presets": [
+        [
+          "@babel/preset-env",
+          {
+            "loose": true,
+            "modules": false
+          }
+        ]
+      ]
+    }
+  }
+}

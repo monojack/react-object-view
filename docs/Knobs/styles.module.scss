@@ -1,0 +1,14 @@
+.knobs {
+  .tabs {
+    height: 100%;
+
+    > header {
+      flex: none;
+      height: 32px;
+    }
+
+    :global .content {
+      height: calc(100% - 32px);
+    }
+  }
+}

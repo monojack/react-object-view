@@ -1,0 +1,27 @@
+.main {
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: stretch;
+  padding: 64px 0 96px;
+  width: 60vw;
+  height: 100vh;
+  max-width: 980px;
+  margin: auto;
+
+  .view {
+    flex: auto;
+    height: 60%;
+  }
+
+  .knobs {
+    position: relative;
+    height: 40%;
+    flex: none;
+    border-bottom-left-radius: 12px;
+    border-bottom-right-radius: 12px;
+    overflow: hidden;
+    padding: 16px;
+    background-color: #fff;
+  }
+}

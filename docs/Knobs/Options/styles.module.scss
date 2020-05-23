@@ -1,0 +1,26 @@
+.options {
+  display: flex;
+  height: 100%;
+  flex-flow: column;
+  background-color: #fff;
+  padding: 24px 0;
+  overflow-y: auto;
+
+  label {
+    > *:first-child {
+      display: block;
+    }
+  }
+
+  :global .with-label {
+    width: 100% !important;
+
+    > div {
+      width: inherit;
+    }
+  }
+
+  .input {
+    margin-bottom: 0.5rem;
+  }
+}

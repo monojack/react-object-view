@@ -1,0 +1,103 @@
+{
+  "name": "react-object-view",
+  "version": "0.0.0",
+  "description": "React component for viewing Javascript objects",
+  "main": "cjs/index.js",
+  "module": "esm/index.js",
+  "scripts": {
+    "clean": "rimraf umd cjs esm",
+    "prebuild:docs": "npm run build",
+    "build:docs": "NODE_ENV=production webpack -p --silent",
+    "start:docs": "NODE_ENV=development webpack-dev-server",
+    "prebuild": "npm run clean",
+    "predev": "npm run build",
+    "dev": "npm run build:esm -- --watch",
+    "build:cjs": "babel src --out-dir cjs",
+    "build:esm": "cross-env BABEL_ENV=esm babel src --out-dir esm",
+    "build": "npm run build:cjs && npm run build:esm",
+    "format": "prettier --write \"src/**/*.js\"",
+    "lint": "eslint src",
+    "prepare": "npm run clean && npm run build"
+  },
+  "keywords": [
+    "react",
+    "recoil",
+    "object",
+    "json",
+    "view",
+    "tree"
+  ],
+  "homepage": "https://github.com/monojack/react-object-view",
+  "bugs": "https://github.com/monojack/react-object-view/issues",
+  "npmName": "react-object-view",
+  "files": [
+    "esm",
+    "cjs"
+  ],
+  "author": "Ionut Achim <achimvionut@gmail.com>",
+  "license": "ISC",
+  "sideEffects": false,
+  "browserslist": {
+    "production": [
+      ">2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version"
+    ]
+  },
+  "dependencies": {
+    "recoil": "^0.0.7"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.8.3",
+    "@babel/core": "^7.8.3",
+    "@babel/plugin-transform-react-jsx": "^7.8.3",
+    "@babel/preset-env": "^7.8.3",
+    "@zeit-ui/react": "^1.5.0",
+    "@zeit-ui/react-icons": "^1.2.2",
+    "babel-eslint": "^10.0.3",
+    "babel-loader": "^8.0.6",
+    "classnames": "^2.2.6",
+    "clean-webpack-plugin": "^3.0.0",
+    "copy-webpack-plugin": "^5.1.1",
+    "cross-env": "^7.0.2",
+    "css-loader": "^3.5.3",
+    "dotenv": "^8.2.0",
+    "eslint": "^7.0.0",
+    "eslint-config-prettier": "^6.10.0",
+    "eslint-config-standard": "^14.1.0",
+    "eslint-plugin-import": "^2.20.1",
+    "eslint-plugin-node": "^11.0.0",
+    "eslint-plugin-prettier": "^3.1.2",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-react": "^7.18.3",
+    "eslint-plugin-standard": "^4.0.1",
+    "file-loader": "^6.0.0",
+    "highlight.js": "^10.0.3",
+    "html-webpack-plugin": "^4.3.0",
+    "imagemin-webpack-plugin": "^2.4.2",
+    "mini-css-extract-plugin": "^0.9.0",
+    "node-sass": "^4.13.1",
+    "optimize-css-assets-webpack-plugin": "^5.0.3",
+    "prettier": "^1.19.1",
+    "react": "^16.13.1",
+    "react-color": "^2.18.1",
+    "react-dom": "^16.13.1",
+    "react-simple-code-editor": "^0.11.0",
+    "rimraf": "^3.0.2",
+    "sass": "^1.24.4",
+    "sass-loader": "^8.0.2",
+    "style-loader": "^1.2.1",
+    "svg-inline-loader": "^0.8.2",
+    "terser-webpack-plugin": "^3.0.1",
+    "url-loader": "^4.1.0",
+    "webpack": "^4.43.0",
+    "webpack-bundle-analyzer": "^3.8.0",
+    "webpack-cli": "^3.3.10",
+    "webpack-dev-server": "^3.10.1",
+    "webpack-merge": "^4.2.2",
+    "webpack-stylish": "^0.1.8"
+  }
+}

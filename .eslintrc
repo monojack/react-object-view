@@ -1,0 +1,40 @@
+{
+  "env": {
+    "browser": true,
+    "es6": true
+  },
+  "extends": [
+    "standard",
+    "plugin:react/recommended",
+    "plugin:prettier/recommended"
+  ],
+  "parser": "babel-eslint",
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "sourceType": "module"
+  },
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
+  },
+  "rules": {
+    "eqeqeq": "off",
+    "no-unused-expressions": "off",
+    "no-sequences": "off",
+    "no-void": "off",
+    "react/prop-types": "off",
+    "react/no-unescaped-entities": "off",
+    "camelcase": [
+      "error",
+      {
+        "allow": ["^Symbol_"]
+      }
+    ]
+  },
+  "globals": {
+    "chrome": true
+  }
+}
