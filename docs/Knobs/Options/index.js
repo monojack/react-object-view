@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import { useRecoilState } from 'recoil'
 
 import Spacer from '@zeit-ui/react/esm/spacer'
@@ -8,162 +8,77 @@ import Text from '@zeit-ui/react/esm/text'
 import Row from '@zeit-ui/react/esm/row'
 import Col from '@zeit-ui/react/esm/col'
 
+import { defaultOptions } from '../../../'
 import { optionsState } from '../../state/options'
 
 import styles from './styles.module.scss'
 
+const additionalProps = {
+  previewOpacity: { step: 0.05 },
+}
+
 export function Options() {
   const [options, setOptions] = useRecoilState(optionsState)
 
-  const [expandLevel, setExpandLevel] = useState(options.expandLevel)
-  const [previewOpacity, setPreviewOpacity] = useState(options.previewOpacity)
-  const [hidePreviews, setHidePreviews] = useState(options.hidePreviews)
-  const [previewPropertiesMaxCount, setPreviewPropertiesMaxCount] = useState(
-    options.previewPropertiesMaxCount,
+  const optionsEntries = Object.entries({
+    ...options,
+    ...defaultOptions,
+  }).sort(([a], [b]) => (a < b ? -1 : 1))
+
+  const toggles = optionsEntries.filter(([, v]) => typeof v === 'boolean')
+  const inputs = optionsEntries.filter(([, v]) =>
+    ['string', 'number'].includes(typeof v),
   )
-  const [previewElementsMaxCount, setPreviewElementsMaxCount] = useState(
-    options.previewElementsMaxCount,
-  )
-  const [previewStringMaxLength, setPreviewStringMaxLength] = useState(
-    options.previewStringMaxLength,
-  )
-  const [hideDataTypes, setHideDataTypes] = useState(options.hideDataTypes)
-  const [hideObjectSize, setHideObjectSize] = useState(options.hideObjectSize)
 
-  useEffect(() => {
+  function setOption([k, v]) {
     setOptions(opts => ({
       ...opts,
-      expandLevel,
+      [k]: v,
     }))
-  }, [expandLevel])
-
-  useEffect(() => {
-    setOptions(opts => ({
-      ...opts,
-      previewOpacity,
-    }))
-  }, [previewOpacity])
-
-  useEffect(() => {
-    setOptions(opts => ({
-      ...opts,
-      hidePreviews,
-    }))
-  }, [hidePreviews])
-
-  useEffect(() => {
-    setOptions(opts => ({
-      ...opts,
-      previewPropertiesMaxCount,
-    }))
-  }, [previewPropertiesMaxCount])
-
-  useEffect(() => {
-    setOptions(opts => ({
-      ...opts,
-      previewElementsMaxCount,
-    }))
-  }, [previewElementsMaxCount])
-
-  useEffect(() => {
-    setOptions(opts => ({
-      ...opts,
-      previewStringMaxLength,
-    }))
-  }, [previewStringMaxLength])
-
-  useEffect(() => {
-    setOptions(opts => ({
-      ...opts,
-      hideDataTypes,
-    }))
-  }, [hideDataTypes])
-
-  useEffect(() => {
-    setOptions(opts => ({
-      ...opts,
-      hideObjectSize,
-    }))
-  }, [hideObjectSize])
+  }
 
   return (
     <div className={styles.options}>
       <Row justify="space-between">
         <Col span={4}>
-          <label>
-            <Text small>hidePreviews</Text>
-            <Toggle
-              initialChecked={options.hidePreviews}
-              onChange={({ target: { checked } }) => setHidePreviews(checked)}
-            ></Toggle>
-          </label>
-          <label>
-            <Text small>hideDataTypes</Text>
-            <Toggle
-              initialChecked={options.hideDataTypes}
-              onChange={({ target: { checked } }) => setHideDataTypes(checked)}
-            ></Toggle>
-          </label>
-          <label>
-            <Text small>hideObjectSize</Text>
-            <Toggle
-              initialChecked={options.hideObjectSize}
-              onChange={({ target: { checked } }) => setHideObjectSize(checked)}
-            ></Toggle>
-          </label>
+          {toggles.map(([k, v]) => (
+            <label key={k}>
+              <Text small>{k}</Text>
+              <Toggle
+                initialChecked={options[k]}
+                onChange={({ target: { checked } }) => setOption([k, checked])}
+              ></Toggle>
+            </label>
+          ))}
         </Col>
         <Spacer />
-        <Col span={11}>
-          <Input
-            className={styles.input}
-            label="previewPropertiesMaxCount"
-            type="number"
-            min={0}
-            value={options.previewPropertiesMaxCount}
-            onChange={({ target: { value } }) =>
-              setPreviewPropertiesMaxCount(+value)
-            }
-          />
-          <Input
-            className={styles.input}
-            label="previewElementsMaxCount"
-            type="number"
-            min={0}
-            value={options.previewElementsMaxCount}
-            onChange={({ target: { value } }) =>
-              setPreviewElementsMaxCount(+value)
-            }
-          />
-          <Input
-            className={styles.input}
-            label="previewStringMaxLength"
-            type="number"
-            min={0}
-            value={options.previewStringMaxLength}
-            onChange={({ target: { value } }) =>
-              setPreviewStringMaxLength(+value)
-            }
-          />
+        <Col span={10}>
+          {inputs.slice(0, 3).map(([k, v]) => (
+            <Input
+              key={k}
+              className={styles.input}
+              label={k}
+              type={typeof v === 'number' ? 'number' : 'text'}
+              min={0}
+              value={options[k] !== undefined ? options[k] : v}
+              onChange={({ target: { value } }) => setOption([k, +value])}
+              {...additionalProps[k]}
+            />
+          ))}
         </Col>
         <Spacer />
-        <Col span={9}>
-          <Input
-            className={styles.input}
-            label="expandLevel"
-            type="number"
-            min={0}
-            value={options.expandLevel}
-            onChange={({ target: { value } }) => setExpandLevel(+value)}
-          />
-          <Input
-            className={styles.input}
-            label="previewOpacity"
-            type="number"
-            min={0}
-            step={0.05}
-            value={options.previewOpacity}
-            onChange={({ target: { value } }) => setPreviewOpacity(+value)}
-          />
+        <Col span={10}>
+          {inputs.slice(3, 6).map(([k, v]) => (
+            <Input
+              key={k}
+              className={styles.input}
+              label={k}
+              type={typeof v === 'number' ? 'number' : 'text'}
+              min={0}
+              value={options[k] !== undefined ? options[k] : v}
+              onChange={({ target: { value } }) => setOption([k, +value])}
+            />
+          ))}
         </Col>
       </Row>
     </div>

@@ -1,0 +1,33 @@
+.editor {
+  position: relative;
+  height: 100%;
+  overflow: hidden;
+  background-color: #fff;
+
+  .codeEditor {
+    height: calc(100% - 24px);
+    width: 100%;
+    overflow-y: auto;
+  }
+
+  .error {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    bottom: 0;
+    left: 0;
+    height: 24px;
+    width: 100%;
+    padding: 0 16px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    background-color: transparent;
+    font-size: 14px;
+
+    &.hasError {
+      background-color: #ffe8e8;
+      color: #ff3e3e;
+    }
+  }
+}

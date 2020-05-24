@@ -1,7 +1,7 @@
 import { atom } from 'recoil'
-import { defaultOptions } from '../../'
+// import { defaultOptions } from '../../'
 
 export const optionsState = atom({
   key: 'demoOptionsState',
-  default: defaultOptions,
+  default: {},
 })

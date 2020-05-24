@@ -71,7 +71,7 @@ export function View(props) {
       </header>
       <main className={styles.main}>
         <ObjectView
-          data={data}
+          data={data.data}
           // data={{ diffData }}
           options={options}
           styles={theme.styles}
