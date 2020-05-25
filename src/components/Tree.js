@@ -13,17 +13,17 @@ const style = {
 
 export function Tree({ data, depth, ...props }) {
   const { fontSize, tabWidth } = useRecoilValue(themeState)
-  const { displayPropertiesMaxCount } = useRecoilValue(optionsState)
+  const { displayEntriesMaxCount } = useRecoilValue(optionsState)
   const [truncate, toggleTruncate] = useState(true)
 
   const entries = useMemo(() => {
     const list = Object.entries(data ?? {})
-    return displayPropertiesMaxCount > 0 &&
+    return displayEntriesMaxCount > 0 &&
       truncate &&
-      list.length > displayPropertiesMaxCount
-      ? list.slice(0, displayPropertiesMaxCount)
+      list.length > displayEntriesMaxCount
+      ? list.slice(0, displayEntriesMaxCount)
       : list
-  }, [data, truncate, displayPropertiesMaxCount])
+  }, [data, truncate, displayEntriesMaxCount])
 
   const size = Object.keys(data ?? {}).length ?? 0
 
@@ -39,18 +39,16 @@ export function Tree({ data, depth, ...props }) {
       {entries.map(([k, v]) => (
         <Entry key={k} data={[k, v]} depth={depth} />
       ))}
-      {displayPropertiesMaxCount > 0 &&
-        truncate &&
-        size > displayPropertiesMaxCount && (
-          <span
-            style={{ cursor: 'pointer' }}
-            onClick={() => toggleTruncate(false)}
-          >
-            {'('}
-            <ins>{size - displayPropertiesMaxCount} more...</ins>
-            {')'}
-          </span>
-        )}
+      {displayEntriesMaxCount > 0 && truncate && size > displayEntriesMaxCount && (
+        <span
+          style={{ cursor: 'pointer' }}
+          onClick={() => toggleTruncate(false)}
+        >
+          {'('}
+          <ins>{size - displayEntriesMaxCount} more...</ins>
+          {')'}
+        </span>
+      )}
     </ol>
   )
 }
