@@ -18,7 +18,9 @@ export function Tree({ data, depth, ...props }) {
 
   const entries = useMemo(() => {
     const list = Object.entries(data ?? {})
-    return truncate && list.length > displayPropertiesMaxCount
+    return displayPropertiesMaxCount > 0 &&
+      truncate &&
+      list.length > displayPropertiesMaxCount
       ? list.slice(0, displayPropertiesMaxCount)
       : list
   }, [data, truncate, displayPropertiesMaxCount])
@@ -37,16 +39,18 @@ export function Tree({ data, depth, ...props }) {
       {entries.map(([k, v]) => (
         <Entry key={k} data={[k, v]} depth={depth} />
       ))}
-      {truncate && size > displayPropertiesMaxCount && (
-        <span
-          style={{ cursor: 'pointer' }}
-          onClick={() => toggleTruncate(false)}
-        >
-          {'('}
-          <ins>{size - displayPropertiesMaxCount} more...</ins>
-          {')'}
-        </span>
-      )}
+      {displayPropertiesMaxCount > 0 &&
+        truncate &&
+        size > displayPropertiesMaxCount && (
+          <span
+            style={{ cursor: 'pointer' }}
+            onClick={() => toggleTruncate(false)}
+          >
+            {'('}
+            <ins>{size - displayPropertiesMaxCount} more...</ins>
+            {')'}
+          </span>
+        )}
     </ol>
   )
 }
