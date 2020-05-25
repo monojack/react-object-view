@@ -6,7 +6,10 @@ import {
   isMap,
   isSet,
 } from '../utils/types'
-import { customValue as Symbol_customValue } from '../symbols'
+import {
+  customEntry as Symbol_customEntry,
+  customValue as Symbol_customValue,
+} from '../symbols'
 
 import { Node } from './Node'
 import { Leaf } from './Leaf'
@@ -23,7 +26,9 @@ const isNode = ([, value]) => {
 export function Entry({ data, depth }) {
   return (
     <li>
-      {data[1]?.[Symbol_customValue] ? (
+      {data[1]?.[Symbol_customEntry] ? (
+        data[1][Symbol_customEntry]()
+      ) : data[1]?.[Symbol_customValue] ? (
         <Leaf data={data} />
       ) : isNode(data) ? (
         <Node depth={depth} data={data} />

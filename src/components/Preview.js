@@ -34,7 +34,9 @@ export function Preview({ data, hide, hidePlaceholder = null }) {
   )
 
   return !hide ? (
-    <div style={{ opacity: previewOpacity }}>{vdom}</div>
+    <div id="preview-container" style={{ opacity: previewOpacity }}>
+      {vdom}
+    </div>
   ) : (
     hidePlaceholder
   )
