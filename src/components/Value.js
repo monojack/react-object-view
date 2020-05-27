@@ -219,7 +219,7 @@ export function Value({ data, ...props }) {
           <span style={{ color: theme.valueColor, ...props.style }}>
             {`{`}
             <span style={{ color: theme.color }}>
-              {Object.keys(data).length > 1 ? '…' : ''}
+              {Object.keys(data).length > 0 ? '…' : ''}
             </span>
             {`}`}
           </span>
