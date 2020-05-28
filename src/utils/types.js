@@ -132,8 +132,14 @@ export const isPlainObject = value => {
     return false
   }
 
+  const constructor = value.constructor
+  if (typeof constructor !== 'function') return false
+
   const prototype = Object.getPrototypeOf(value)
-  return prototype === null || prototype === Object.getPrototypeOf({})
+  if (getObjectType(prototype) !== typeNames.Object) return false
+
+  // eslint-disable-next-line no-prototype-builtins
+  return prototype.hasOwnProperty('isPrototypeOf')
 }
 
 export const isBuffer = value => value?.constructor?.isBuffer?.(value) ?? false
