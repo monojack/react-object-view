@@ -48,8 +48,8 @@
     ]
   },
   "peerDependencies": {
-    "react": ">=^16.13.1",
-    "react-dom": ">=^16.13.1"
+    "react": ">=16.13.1",
+    "react-dom": ">=16.13.1"
   },
   "dependencies": {
     "recoil": "^0.6.1"
