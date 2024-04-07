@@ -203,8 +203,10 @@ export const isEmptyMap = value => isMap(value) && value.size === 0
 export const isURLObject = value => isObjectOfType(typeNames.URL)(value)
 export const isUrl = value => {
   try {
-    new URL(value)
-    return true
+    const urlObject = new URL(value)
+    return (
+      !!urlObject.protocol && !!urlObject.host && urlObject.origin !== 'null'
+    )
   } catch {
     return false
   }
